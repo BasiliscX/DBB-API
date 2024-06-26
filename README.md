@@ -12,7 +12,8 @@ DBB API is an API for managing (currently supports select queries) a cloud datab
 - **GET https://dbb-api.onrender.com/dbb/articlesxsuppliers**: Lists articles by suppliers.
 
 ### Coming soon.
-This API is designed to be consumed by an application that will use AI to receive natural language queries, translate them into SQL statements, and return the response to the user in natural language.
+- The rest of the database models.
+- This API is designed to be consumed by an application that will use AI to receive natural language queries, translate them into SQL statements, and return the response to the user in natural language.
 
 ## Contribution
 
