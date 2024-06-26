@@ -1,13 +1,11 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../core/db/prisma-client.js';
 
 export default async function getArticles() {
     try {
-        const articulos = await prisma.articulos.findMany();
-        console.log(articulos);
-        return articulos;
+        const articles = await prisma.articulos.findMany();
+        return articles;
     } catch (error) {
-        console.error('Error fetching articles:', error);
+        console.error('Error in the service fetching articles:', error);
         throw new Error('Error fetching articles');
     }
 }
