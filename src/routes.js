@@ -6,7 +6,7 @@ import articlesxsuppliers from './features/articlesxsuppliers/articlesxsuplies.r
 
 const route = express.Router();
 
-route.use('/dbb', mainpage);
+route.use('/', mainpage);
 route.use('/dbb/articles', articles);
 route.use('/dbb/suppliers', suppliers);
 route.use('/dbb/articlesxsuppliers', articlesxsuppliers);
