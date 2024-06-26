@@ -1,13 +1,69 @@
-<!-- src/views/welcome.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida a mi Aplicación</title>
+    <title>Welcome to DBB API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        p, ul, ol {
+            color: #555;
+        }
+        a {
+            color: #0066cc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a mi Aplicación</h1>
-    <p>Esta es una página de bienvenida.</p>
+    <div class="container">
+        <h1>DBB API</h1>
+
+        <h2>Description</h2>
+        <p>DBB API is an API for managing (currently supports select queries) a database that includes articles, suppliers, and more. It is built using Node.js, Express.js, and Prisma, and is <a href="https://dbb-api.onrender.com/">deployed on Render</a>.</p>
+
+        <h2>Available Routes</h2>
+        <ul>
+            <li><strong>GET <strong>https://dbb-api.onrender.com/</strong>: Displays a welcome page.  (THIS)</li>
+            <li><strong>GET <a href="https://dbb-api.onrender.com/dbb/articles">https://dbb-api.onrender.com/dbb/articles</a></strong>: Lists all articles.</li>
+            <li><strong>GET <a href="https://dbb-api.onrender.com/dbb/suppliers">https://dbb-api.onrender.com/dbb/suppliers</a></strong>: Lists all suppliers.</li>
+            <li><strong>GET <a href="https://dbb-api.onrender.com/dbb/articlesxsuppliers">https://dbb-api.onrender.com/dbb/articlesxsuppliers</a></strong>: Lists articles by suppliers.</li>
+        </ul>
+
+        <h2>Coming soon</h2>
+        <p>This API is designed to be consumed by an application that will use AI to receive natural language queries, translate them into SQL statements, and return the response to the user in natural language.</p>
+
+        <h2>Contribution</h2>
+        <p>Contributions are welcome. Please follow these steps:</p>
+        <ol>
+            <li>Fork the <a href="https://github.com/BasiliscX/DBB-API.git">repository</a>.</li>
+            <li>Create a new branch (<code>git checkout -b feature/new-feature</code>).</li>
+            <li>Make your changes and commit them (<code>git commit -am 'Add new feature'</code>).</li>
+            <li>Push to the branch (<code>git push origin feature/new-feature</code>).</li>
+            <li>Open a Pull Request.</li>
+        </ol>
+
+        <h2>Acknowledgements</h2>
+        <p>This project uses open-source technologies and thanks the developer community for their support and contributions.</p>
+
+        <h2>Contact</h2>
+        <p>For any questions or suggestions, feel free to contact me through my <a href="https://github.com/BasiliscX">GitHub profile</a>.</p>
+    </div>
 </body>
 </html>
