@@ -1,0 +1,19 @@
+{
+  "name": "base-de-datos-en-la-nube-con-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.16.0",
+    "express": "^4.19.2",
+    "prisma": "^5.16.0"
+  }
+}

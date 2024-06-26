@@ -1,0 +1,95 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Articulos {
+  CodArt_A               String                   @id @db.Char(10)
+  DescArt_A              String                   @db.VarChar(20)
+  StockArt_A             Int                      @default(0)
+  PrecioUnitArt_A        Decimal                  @default(0.00) @db.Decimal(8, 2)
+  PuntoPedidoArt_A       Int                      @default(0)
+  ActivoArt_A            Boolean                  @default(dbgenerated("b'1'")) @db.Bit(1)
+  ArticulosXProveedor    ArticulosXProveedor[]
+  DetalleFacturas        DetalleFacturas[]
+  DetalleOrdenesDeCompra DetalleOrdenesDeCompra[]
+  HistoricoPreciosCompra HistoricoPreciosCompra[]
+}
+
+model ArticulosXProveedor {
+  CodProv_AXP        String      @db.Char(10)
+  CodArt_AXP         String      @db.Char(10)
+  PrecioCompra_AXP   Decimal     @default(0.00) @db.Decimal(8, 2)
+  ActivoArtXProv_AXP Boolean     @default(dbgenerated("b'1'")) @db.Bit(1)
+  Articulos          Articulos   @relation(fields: [CodArt_AXP], references: [CodArt_A], onDelete: NoAction, onUpdate: NoAction, map: "FK_ARTICULOSXPROVEEDOR_ARTICULOS")
+  Proveedores        Proveedores @relation(fields: [CodProv_AXP], references: [CodProv_Pr], onDelete: NoAction, onUpdate: NoAction, map: "FK_ARTICULOSXPROVEEDOR_PROVEEDORES")
+
+  @@id([CodProv_AXP, CodArt_AXP])
+  @@index([CodArt_AXP], map: "FK_ARTICULOSXPROVEEDOR_ARTICULOS")
+}
+
+model DetalleFacturas {
+  NumFact_DF       Int
+  CodArt_DF        String    @db.Char(10)
+  CantArt_DF       Int       @default(0)
+  PrecioUnitArt_DF Decimal   @default(0.00) @db.Decimal(8, 2)
+  Articulos        Articulos @relation(fields: [CodArt_DF], references: [CodArt_A], onDelete: NoAction, onUpdate: NoAction, map: "FK_DETALLEDEFACTURAS_ARTICULOS")
+  Facturas         Facturas  @relation(fields: [NumFact_DF], references: [NumFact_F], onDelete: NoAction, onUpdate: NoAction, map: "FK_DETALLEDEFACTURAS_FACTURAS")
+
+  @@id([NumFact_DF, CodArt_DF])
+  @@index([CodArt_DF], map: "FK_DETALLEDEFACTURAS_ARTICULOS")
+}
+
+model DetalleOrdenesDeCompra {
+  NumOrdComp_DODC    Int
+  CodProv_DOC        String      @db.Char(10)
+  CodArt_DODC        String      @db.Char(10)
+  CantArt_DODC       Int         @default(0)
+  PrecioUnitArt_DODC Decimal     @default(0.00) @db.Decimal(8, 2)
+  Articulos          Articulos   @relation(fields: [CodArt_DODC], references: [CodArt_A], onDelete: NoAction, onUpdate: NoAction, map: "FK_DETALLEORDENESDECOMPRA_ARTICULOS")
+  Proveedores        Proveedores @relation(fields: [CodProv_DOC], references: [CodProv_Pr], onDelete: NoAction, onUpdate: NoAction, map: "FK_DETALLEORDENESDECOMPRA_PROVEEDORES")
+
+  @@id([NumOrdComp_DODC, CodProv_DOC, CodArt_DODC])
+  @@index([CodArt_DODC], map: "FK_DETALLEORDENESDECOMPRA_ARTICULOS")
+  @@index([CodProv_DOC], map: "FK_DETALLEORDENESDECOMPRA_PROVEEDORES")
+}
+
+model Facturas {
+  NumFact_F       Int               @id @default(autoincrement())
+  FechaFact_F     DateTime          @db.Date
+  TotalFact_F     Decimal           @default(0.00) @db.Decimal(8, 2)
+  DetalleFacturas DetalleFacturas[]
+}
+
+model HistoricoPreciosCompra {
+  Cod_HPC               Int         @id @default(autoincrement())
+  CodArt_HPC            String      @db.Char(10)
+  CodProv_HPC           String      @db.Char(10)
+  PrecioCompraArt_HPC   Decimal     @default(0.00) @db.Decimal(8, 2)
+  FechaModificacion_HPC DateTime    @db.Date
+  Articulos             Articulos   @relation(fields: [CodArt_HPC], references: [CodArt_A], onDelete: NoAction, onUpdate: NoAction, map: "FK_HPC_ARTICULOS")
+  Proveedores           Proveedores @relation(fields: [CodProv_HPC], references: [CodProv_Pr], onDelete: NoAction, onUpdate: NoAction, map: "FK_HPC_PROVEEDORES")
+
+  @@index([CodArt_HPC], map: "FK_HPC_ARTICULOS")
+  @@index([CodProv_HPC], map: "FK_HPC_PROVEEDORES")
+}
+
+model OrdenesDeCompra {
+  NumOrdComp_ODC Int      @id @default(autoincrement())
+  FechaOrden_ODC DateTime @db.Date
+  Total_ODC      Decimal  @default(0.00) @db.Decimal(8, 2)
+}
+
+model Proveedores {
+  CodProv_Pr             String                   @id @db.Char(10)
+  RazonSocProv_Pr        String                   @db.VarChar(50)
+  TelProv_Pr             String                   @db.VarChar(20)
+  MailProv_Pr            String?                  @db.VarChar(30)
+  ArticulosXProveedor    ArticulosXProveedor[]
+  DetalleOrdenesDeCompra DetalleOrdenesDeCompra[]
+  HistoricoPreciosCompra HistoricoPreciosCompra[]
+}
