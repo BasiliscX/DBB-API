@@ -6,7 +6,7 @@ import path from 'path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const router = express.Router();
 
-router.get('/dbb', (req, res) => {
+router.get('/', (req, res) => {
     const filePath = path.join(__dirname, '../views/welcome.html');
     res.sendFile(filePath);
 });
