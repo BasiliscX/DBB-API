@@ -2,7 +2,7 @@
 
 ## Description
 
-DBB API is an API for managing (currently supports select queries) a database that includes articles, suppliers, and more. It is built using Node.js, Express.js, and Prisma, and is [deployed on Render.](https://dbb-api.onrender.com/)
+DBB API is an API for managing (currently supports select queries) a cloud database that includes articles, suppliers, and more. It is built using Node.js, Express.js, and Prisma, and is [deployed on Render.](https://dbb-api.onrender.com/)
 
 ### Available Routes
 
